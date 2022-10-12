@@ -39,8 +39,7 @@ jobs:
           IFS="," read -a myarray <<< ${{ steps.finding-files.outputs.FILELIST }}
           for i in "${myarray[@]}"; do
             file_path=$(dirname "${i}")
-            file_name=$(basename "${i}")
-            cd $file_path
+            file_name=$(basename "${i}")            
             echo "Running ${file_name}"
-            elixir $file_name
+            elixir $i
           done
