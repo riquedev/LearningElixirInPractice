@@ -28,15 +28,18 @@ jobs:
         path: deps
         key: ${{ runner.os }}-mix-${{ hashFiles('**/mix.lock') }}
         restore-keys: ${{ runner.os }}-mix-
+
     - name: Finding files and store to output
       id: finding-files
       run: |
-        echo "::set-output name=FILELIST::$(find . -name '*/answers/*.ex' -print)"
-        
+        echo "::set-output name=FILELIST::$(find . -name '*.ex' -print)"
+
     - name: Running files
       run: |
           IFS="," read -a myarray <<< ${{ steps.finding-files.outputs.FILELIST }}
           for i in "${myarray[@]}"; do
+            file_path=$(dirname "${i}")
+            file_name=$(basename "${i}")
             cd file_path
             elixir file_name
           done
