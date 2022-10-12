@@ -40,6 +40,6 @@ jobs:
           for i in "${myarray[@]}"; do
             file_path=$(dirname "${i}")
             file_name=$(basename "${i}")
-            cd file_path
-            elixir file_name
+            cd $file_path
+            elixir $file_name
           done
