@@ -41,5 +41,6 @@ jobs:
             file_path=$(dirname "${i}")
             file_name=$(basename "${i}")
             cd $file_path
+            echo "Running ${file_name}"
             elixir $file_name
           done
